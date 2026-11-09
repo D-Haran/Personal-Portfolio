@@ -57,7 +57,7 @@ export function Hero() {
           className="rise mt-8 flex items-center gap-3 text-sm text-muted"
           style={{ ["--d" as string]: "720ms" }}
         >
-          <span className="pulse-dot relative inline-block size-2 rounded-full bg-ok text-ok" />
+          {/* <span className="pulse-dot relative inline-block size-2 rounded-full bg-ok text-ok" /> */}
           {site.status}
         </p>
       </div>
