@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="44" fill="#131318"/>
+  <g fill="none" stroke="#f2f2f5" stroke-width="5.5" stroke-linecap="square">
+    <circle cx="100" cy="100" r="80"/>
+    <path d="M66 76 L66 142"/>
+    <path d="M66 76 L91 76"/>
+    <path d="M91 76 L66 142"/>
+    <path d="M66 142 L71 142"/>
+    <path d="M102 77 L102 152"/>
+    <path d="M102 77 L140 74"/>
+    <path d="M140 74 L102 112"/>
+    <path d="M102 112 L147 135"/>
+  </g>
+</svg>

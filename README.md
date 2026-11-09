@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# derrickratnaharan.com
 
-## Getting Started
+Personal portfolio: Next.js 16 (App Router, fully static) + Tailwind v4. Only runtime dependencies: `next`, `react`, `react-dom`. No animation library; all motion is CSS plus `IntersectionObserver`, and it respects `prefers-reduced-motion`.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+|---|---|
+| Name, links, email, status line, site URL | `lib/site.ts` → `site` |
+| Project cards (summary, metrics, stack, links) | `lib/site.ts` → `projects` |
+| Experience, awards, skills | `lib/site.ts` |
+| "Currently" list and About copy | `components/home/About.tsx` |
+| Case studies | `app/work/{kestrel,repograph,campify}/page.tsx` |
+| RepoGraph explorer data (from the real fixture) | `components/case/ImpactExplorer.tsx` |
+| Resume PDF | `public/Derrick_Ratnaharan_Resume.pdf` (copied from `~/Documents/Resumes/`) |
+| Photo / screenshots | `public/derrick.jpg`, `public/campify/` |
+| Colours, fonts, motion | `app/globals.css` (`@theme` tokens at the top) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push to GitHub and import the repo on Vercel; no config needed. Set `NEXT_PUBLIC_SITE_URL` to the final domain so metadata, the sitemap and Open Graph links are correct.
