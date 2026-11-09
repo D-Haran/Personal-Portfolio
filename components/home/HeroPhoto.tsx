@@ -43,7 +43,7 @@ export function HeroPhoto() {
             sizes="(min-width: 1024px) 420px, 80vw"
             className="object-cover object-center"
             style={{
-              transform: "translateY(-8.9%) scale(1.32)",
+              transform: "translateY(-8.9%) scale(1.52)",
               transformOrigin: "center",
               filter: "brightness(1) contrast(1.06) saturate(1)",
             }}
