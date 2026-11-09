@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { awards } from "@/lib/site";
+import { awards, stack } from "@/lib/site";
+import { LogoTile } from "../LogoTile";
 import { Reveal } from "../Reveal";
 import { SectionHeading } from "./SectionHeading";
 
@@ -11,7 +12,7 @@ const now = [
 
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8 sm:py-28">
+    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20">
       <SectionHeading eyebrow="About">About me</SectionHeading>
 
       <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-[1.2fr_1fr]">
@@ -73,6 +74,26 @@ export function About() {
           </ul>
         </Reveal>
       </div>
+
+      <Reveal delay={120} className="card mt-6 p-7 sm:p-9">
+        <p className="eyebrow">Tools &amp; technologies</p>
+        <ul className="mt-7 grid grid-cols-4 gap-x-2 gap-y-6 sm:grid-cols-5 lg:grid-cols-7">
+          {stack.map((s) => (
+            <li key={s.name} className="group flex flex-col items-center gap-2.5 text-center">
+              <LogoTile
+                src={s.logo}
+                alt={s.name}
+                size={56}
+                className="transition-transform duration-300 group-hover:-translate-y-1"
+                radius="rounded-2xl"
+              />
+              <span className="text-xs leading-tight text-muted transition-colors duration-300 group-hover:text-fg">
+                {s.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </section>
   );
 }

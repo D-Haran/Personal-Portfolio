@@ -8,11 +8,6 @@ const stats = [
   { node: <CountUp to={3} suffix="×" />, label: "hackathon winner" },
 ];
 
-const stack = [
-  "C++20", "Rust", "Metal", "Python", "TypeScript", "Tree-sitter", "Flutter",
-  "React", "Next.js", "Node.js", "Firebase", "PostgreSQL", "Docker", "CMake", "AWS",
-];
-
 export function Proof() {
   return (
     <section aria-label="Highlights" className="relative">
@@ -28,17 +23,6 @@ export function Proof() {
             </div>
           ))}
         </Reveal>
-      </div>
-
-      <div className="marquee mt-14 overflow-hidden" aria-hidden>
-        <div className="marquee-track flex w-max gap-10 font-mono text-sm tracking-[0.2em] text-faint">
-          {[...stack, ...stack].map((s, i) => (
-            <span key={i} className="flex items-center gap-10 uppercase">
-              {s}
-              <span className="size-1 rounded-full bg-white/20" />
-            </span>
-          ))}
-        </div>
       </div>
     </section>
   );

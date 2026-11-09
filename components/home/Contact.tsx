@@ -5,7 +5,7 @@ import { CopyEmail } from "./CopyEmail";
 
 export function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-16 pt-24 sm:px-8 sm:pt-28">
+    <section id="contact" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
       <Reveal className="card relative overflow-hidden px-6 py-16 text-center sm:px-12 sm:py-24">
         <div
           aria-hidden

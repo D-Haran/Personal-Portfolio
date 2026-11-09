@@ -5,7 +5,7 @@ import { SectionHeading } from "./SectionHeading";
 
 export function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8 sm:py-28">
+    <section id="experience" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20">
       <SectionHeading eyebrow="Experience">Where I&apos;ve worked</SectionHeading>
 
       <ol className="mt-16 border-t border-line">

@@ -332,7 +332,7 @@ html.cursor-custom * {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 10050;
   pointer-events: none;
   border-radius: 999px;
   opacity: 0;

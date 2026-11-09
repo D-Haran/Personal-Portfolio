@@ -8,7 +8,7 @@ import { SectionHeading } from "./SectionHeading";
 
 export function Work() {
   return (
-    <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8 sm:py-28">
+    <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20">
       <SectionHeading
         eyebrow="Selected work"
         sub="An inference engine, a code-analysis tool and a consumer app. Each one has a write-up with the architecture, the numbers and what I'd change."
