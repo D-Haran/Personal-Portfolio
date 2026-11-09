@@ -54,11 +54,11 @@ export function HeroPhoto() {
           <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_80%_10%,rgb(240_170_120/0.12),transparent)]" />
 
           {/* hint */}
-          <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors duration-300 group-hover:bg-black/60">
+          {/* <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors duration-300 group-hover:bg-black/60">
             <span className="size-1.5 rounded-full bg-ok" />
             View résumé
             <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </span>
+          </span> */}
         </div>
       </button>
 
