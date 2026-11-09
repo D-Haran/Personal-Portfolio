@@ -36,14 +36,14 @@ export function About() {
 
         <Reveal
           delay={80}
-          className="group relative aspect-[16/11] min-h-[300px] overflow-hidden rounded-[1.75rem] border border-line lg:aspect-auto"
+          className="group relative aspect-square w-full max-w-[30rem] max-h-[25rem] justify-self-center overflow-hidden rounded-full border border-line"
         >
           <Image
             src="/derrick-about.jpg"
             alt="Derrick at Okanagan Lake"
             fill
-            sizes="(min-width: 1024px) 480px, 90vw"
-            className="object-cover object-[50%_30%] transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            sizes="(min-width: 824px) 280px, 60vw"
+            className="scale-[1.3] object-cover object-[50%_30%] transition-transform duration-700 ease-out group-hover:scale-[1.22]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b10]/55 via-transparent to-transparent" />
         </Reveal>
