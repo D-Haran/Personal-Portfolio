@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Cursor } from "@/components/Cursor";
 import { Footer } from "@/components/Footer";
 import { Intro } from "@/components/Intro";
 import { Nav } from "@/components/Nav";
+import { Particles } from "@/components/Particles";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -49,6 +51,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-dvh">
         <Intro />
+        <Cursor />
+        <Particles />
         <div aria-hidden className="aurora" />
         <div aria-hidden className="grain" />
         <a

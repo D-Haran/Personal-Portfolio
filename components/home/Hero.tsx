@@ -11,14 +11,16 @@ export function Hero() {
         </p>
 
         <h1 className="mt-6 text-[clamp(3rem,8vw,5.6rem)] font-medium leading-[0.98] tracking-[-0.045em]">
-          <span className="block overflow-hidden pb-[0.08em]">
-            <span className="rise block" style={{ ["--d" as string]: "120ms" }}>
-              Derrick
+          <span id="hero-name" className="inline-block align-top">
+            <span className="block overflow-hidden pb-[0.08em]">
+              <span className="rise block" style={{ ["--d" as string]: "120ms" }}>
+                Derrick
+              </span>
             </span>
-          </span>
-          <span className="block overflow-hidden pb-[0.08em]">
-            <span className="rise block" style={{ ["--d" as string]: "220ms" }}>
-              Ratnaharan
+            <span className="block overflow-hidden pb-[0.08em]">
+              <span className="rise block" style={{ ["--d" as string]: "220ms" }}>
+                Ratnaharan
+              </span>
             </span>
           </span>
         </h1>

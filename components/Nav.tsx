@@ -85,7 +85,7 @@ export function Nav() {
       >
         <Link href="/" onClick={() => setOpen(false)} className="group flex items-center gap-2.5 rounded-full py-1 pl-1 pr-3" aria-label="Home">
           <BrandLogo
-            strokeWidth={3}
+            id="nav"
             className="size-9 text-fg transition-transform duration-500 group-hover:rotate-[8deg]"
           />
           <span className="text-[0.95rem] font-medium tracking-tight">

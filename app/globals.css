@@ -52,10 +52,17 @@ body {
 
 /* ---------- Ambient background ---------- */
 
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
 .aurora {
   position: fixed;
   inset: -20vmax;
-  z-index: -2;
+  z-index: -3;
   pointer-events: none;
   background:
     radial-gradient(42vmax 36vmax at 18% 14%, rgb(122 58 132 / 0.42), transparent 70%),
@@ -254,38 +261,119 @@ body {
   z-index: 9999;
   display: grid;
   place-items: center;
-  background: var(--color-bg);
   pointer-events: none;
-  animation: intro-out 2s var(--ease-out-soft) forwards;
+}
+
+.intro-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  transition: opacity 0.7s var(--ease-out-soft);
 }
 
 .intro-logo {
-  width: clamp(104px, 22vw, 150px);
+  position: relative;
+  width: clamp(96px, 20vw, 136px);
   height: auto;
-  animation: intro-pop 2s var(--ease-out-soft) forwards;
 }
 
-.intro .draw {
+.intro[data-phase="done"] {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s var(--ease-out-soft), visibility 0s linear 0.6s;
+}
+
+.intro .ink {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: intro-draw 1.05s var(--ease-out-soft) 0.12s forwards;
+  animation: intro-draw 1.05s var(--ease-out-soft) 0.1s forwards;
+}
+
+.intro .cut {
+  opacity: 0;
+  animation: intro-fade 0.45s ease 0.9s forwards;
 }
 
 @keyframes intro-draw {
   to { stroke-dashoffset: 0; }
 }
 
-@keyframes intro-pop {
-  0% { transform: scale(0.92); opacity: 0.2; }
-  22% { opacity: 1; }
-  62% { transform: scale(1); }
-  82% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.04); opacity: 0; }
+@keyframes intro-fade {
+  to { opacity: 1; }
 }
 
-@keyframes intro-out {
-  0%, 70% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
+/* ---------- Résumé modal ---------- */
+
+.resume-backdrop {
+  animation: modal-fade 0.3s var(--ease-out-soft) both;
+}
+
+.resume-panel {
+  animation: modal-rise 0.42s var(--ease-out-soft) both;
+}
+
+@keyframes modal-fade {
+  from { opacity: 0; }
+}
+
+@keyframes modal-rise {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+}
+
+/* ---------- Custom cursor ---------- */
+
+html.cursor-custom,
+html.cursor-custom * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+html.cursor-ready .cursor-dot,
+html.cursor-ready .cursor-ring {
+  opacity: 1;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent-hi);
+  transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgb(255 255 255 / 0.35);
+  transition:
+    opacity 0.25s ease,
+    width 0.28s var(--ease-out-soft),
+    height 0.28s var(--ease-out-soft),
+    border-color 0.28s ease,
+    background-color 0.28s ease;
+}
+
+.cursor-ring.is-hover {
+  width: 56px;
+  height: 56px;
+  border-color: color-mix(in srgb, var(--color-accent-hi) 80%, transparent);
+  background-color: color-mix(in srgb, var(--color-accent-hi) 9%, transparent);
+}
+
+.cursor-ring.is-down {
+  width: 26px;
+  height: 26px;
+  border-color: var(--color-accent-hi);
 }
 
 /* ---------- Reduced motion ---------- */
