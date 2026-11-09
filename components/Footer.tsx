@@ -10,7 +10,7 @@ export function Footer() {
           © 2026 {site.name}. Built with Next.js &amp; Tailwind.
         </p>
         <div className="flex items-center gap-5">
-          <TorontoClock />
+          {/* <TorontoClock /> */}
           <Link href="/#work" className="hover:text-fg">Work</Link>
           <a href={site.github} target="_blank" rel="noreferrer" className="hover:text-fg">GitHub</a>
           <a href={site.linkedin} target="_blank" rel="noreferrer" className="hover:text-fg">LinkedIn</a>

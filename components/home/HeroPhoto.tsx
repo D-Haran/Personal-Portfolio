@@ -49,8 +49,8 @@ export function HeroPhoto() {
             }}
           />
           {/* tone the bright outdoor photo toward the site's dark, moody palette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#09090c]/62 via-[#120b22]/15 to-[#1b1030]/19 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-[#0e0a1a]/14 mix-blend-soft-light" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#09090c]/58 via-[#120b22]/13 to-[#1b1030]/17 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-[#0e0a1a]/12 mix-blend-soft-light" />
           <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_80%_10%,rgb(240_170_120/0.12),transparent)]" />
 
           {/* hint */}
