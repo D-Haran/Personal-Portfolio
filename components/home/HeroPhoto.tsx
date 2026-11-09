@@ -41,10 +41,17 @@ export function HeroPhoto() {
             fill
             priority
             sizes="(min-width: 1024px) 420px, 80vw"
-            className="object-cover object-[50%_28%] saturate-[1.03]"
+            className="object-cover object-center"
+            style={{
+              transform: "translateY(-8.9%) scale(1.32)",
+              transformOrigin: "center",
+              filter: "brightness(1) contrast(1.06) saturate(0.78)",
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1b1030]/55 via-transparent to-[#2a1838]/20 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_80%_10%,rgb(240_170_120/0.16),transparent)]" />
+          {/* tone the bright outdoor photo toward the site's dark, moody palette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#09090c]/80 via-[#120b22]/25 to-[#1b1030]/30 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-[#0e0a1a]/25 mix-blend-soft-light" />
+          <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_80%_10%,rgb(240_170_120/0.12),transparent)]" />
 
           {/* hint */}
           <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors duration-300 group-hover:bg-black/60">
