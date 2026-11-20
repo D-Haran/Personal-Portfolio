@@ -27,7 +27,7 @@ export default function KestrelPage() {
       <Prose>
         <p>
           Libraries make inference look like one function call. I wanted to know what the call does, so I wrote the
-          whole transformer forward pass in C++20 — memory-mapped Safetensors loading, RoPE, grouped-query attention,
+          whole transformer forward pass in C++20: memory-mapped Safetensors loading, RoPE, grouped-query attention,
           KV caching, SwiGLU and sampling. No PyTorch, no llama.cpp, no MLX.
         </p>
         <p>
@@ -36,7 +36,7 @@ export default function KestrelPage() {
         </p>
         <p>
           The first version had an embarrassing result: Metal was <em>slower</em> than the CPU. Profiling found the
-          reason — <strong>91.9% of GPU time was spent inside <code>waitUntilCompleted</code></strong>, because the
+          reason: <strong>91.9% of GPU time was spent inside <code>waitUntilCompleted</code></strong>, because the
           backend encoded a command buffer per operation and blocked on each one. Fusing the whole step into a single
           command buffer with a GPU-resident KV cache took decode from <strong>21.8 to 217 tok/s</strong>. Batching
           prefill into matrix-matrix multiplies did the same for the CPU path, 37.9 to 211 tok/s.

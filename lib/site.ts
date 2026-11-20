@@ -85,12 +85,12 @@ export const projects: Project[] = [
   {
     slug: "shell",
     index: "04",
-    title: "mysh",
+    title: "Custom Unix Shell",
     kicker: "Unix shell & TCP chat server",
     blurb:
       "A Unix shell in C with pipelines and background jobs, plus a TCP chat server on one select() loop.",
     summary:
-      "A Unix shell written in C — pipelines, background jobs, variable expansion — with a single-threaded TCP chat server built into it, multiplexing every client through one non-blocking select() loop.",
+      "A Unix shell written in C with pipelines, background jobs and variable expansion, plus a single-threaded TCP chat server built into it, multiplexing every client through one non-blocking select() loop.",
     metrics: [
       { value: "11", label: "built-ins" },
       { value: "50+", label: "clients" },
@@ -114,7 +114,7 @@ export const experience: ExperienceItem[] = [
     role: "Technical Lead",
     org: "Google Developer Groups on Campus",
     place: "Mississauga, ON",
-    dates: "Oct 2026 — Present",
+    dates: "Oct 2026 - Present",
     logos: [{ src: "/logos/org/gdg.svg", alt: "Google Developer Groups" }],
     points: [
       "Build the technical content for hands-on AI/ML and software engineering workshops: live coding demos and project-based materials.",
@@ -125,7 +125,7 @@ export const experience: ExperienceItem[] = [
     role: "Software Engineering Evaluator (Contract)",
     org: "Mercor Intelligence",
     place: "Remote",
-    dates: "Jun — Sep 2026",
+    dates: "Jun - Sep 2026",
     logos: [{ src: "/logos/org/mercor.png", alt: "Mercor" }],
     points: [
       "Evaluated AI-generated code patches across 70+ software engineering tasks in Python and TypeScript, using Pytest as the arbiter.",
@@ -135,9 +135,9 @@ export const experience: ExperienceItem[] = [
   },
   {
     role: "Software Team Lead",
-    org: "FIRST Robotics — Markham Robotics",
+    org: "FIRST Robotics, Markham Robotics",
     place: "Markham, ON",
-    dates: "Apr 2023 — Jun 2024",
+    dates: "Apr 2023 - Jun 2024",
     logos: [{ src: "/logos/org/first.svg", alt: "FIRST Robotics Competition" }],
     points: [
       "Built a full-stack Next.js/Firebase scouting app with a searchable team database and a unified interactive strategy map.",
@@ -151,7 +151,7 @@ export const education = {
   school: "University of Toronto",
   degree: "B.Sc. Applied Mathematics & Applied Statistics",
   minor: "Minor in Computer Science",
-  dates: "Sep 2024 — Expected May 2028",
+  dates: "Sep 2024 - Expected May 2028",
   coursework: "Data Structures & Algorithms · Software Design · Systems Programming · Machine Learning",
   logo: { src: "/logos/org/utoronto.svg", alt: "University of Toronto" },
 };
@@ -160,7 +160,7 @@ export const awards = [
   { event: "MacHacks 2 · 2023", prize: "Best Business Solution", project: "Friday, an SMS personal finance assistant" },
   { event: "MacHacks 2 · 2023", prize: "Most Creative Use of Twilio", project: "Friday, an SMS personal finance assistant" },
   { event: "eHacks · 2024", prize: "Best Idea for Social Impact", project: "Stuart, an SMS wellness habit coach" },
-  { event: "Hack the North · 2026", prize: "Nominated — Best Use of Solana", project: "Cosign, AI output verification" },
+  { event: "Hack the North · 2026", prize: "Nominated, Best Use of Solana", project: "Cosign, AI output verification" },
 ];
 
 /** Core stack, grouped the way the résumé groups it. Each entry has a logo tile. */

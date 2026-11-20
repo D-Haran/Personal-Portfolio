@@ -13,14 +13,15 @@ type Api = { setRunning: (on: boolean) => void; dispose: () => void };
  * Every model in one scene, arranged as a cluster and turning slowly.
  * No controls and no chrome: it reads as artwork, not a viewer.
  *
- * three and the GLTF loader are imported inside here, so neither lands in the
- * initial bundle.
+ * three, the GLTF loader and the meshopt decoder are imported inside here, so
+ * none of them lands in the initial bundle.
  */
 async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api> {
-  const [THREE, { GLTFLoader }, { RoomEnvironment }] = await Promise.all([
+  const [THREE, { GLTFLoader }, { RoomEnvironment }, { MeshoptDecoder }] = await Promise.all([
     import("three"),
     import("three/examples/jsm/loaders/GLTFLoader.js"),
     import("three/examples/jsm/environments/RoomEnvironment.js"),
+    import("three/examples/jsm/libs/meshopt_decoder.module.js"),
   ]);
 
   const renderer = new THREE.WebGLRenderer({
@@ -67,6 +68,11 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
   };
 
   const loader = new GLTFLoader();
+  // The models in /public/models are meshopt-compressed (see
+  // scripts/optimize-models.sh); without this they will not parse. The decoder
+  // is wasm and runs off the parse path, so it is cheaper than the float32 it
+  // replaces, not more expensive.
+  loader.setMeshoptDecoder(MeshoptDecoder);
   const items: Item[] = [];
 
   let unit = 1;
@@ -83,6 +89,8 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
     const visW = visH * camera.aspect;
     unit = Math.min(visW, visH);
 
+    rectStale = true;
+
     for (const it of items) {
       if (!it) continue;
       it.holder.position.x = it.pos[0] * unit;
@@ -97,7 +105,28 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
   const pan = { x: 0, y: 0 };
   const spinQ = new THREE.Quaternion();
 
+  // Where the pointer last was, in page coordinates, and whether the cached
+  // rect still describes the host. Reading the rect inside the pointer handler
+  // would force a layout on every mouse move anywhere on the page; resolving it
+  // here means at most one layout read per rendered frame, and only when
+  // something has actually moved the host.
+  let rect = host.getBoundingClientRect();
+  let rectStale = true;
+  const staleRect = () => {
+    rectStale = true;
+  };
+  const point = { x: 0, y: 0 };
+  let hasPoint = false;
+
   const render = () => {
+    if (hasPoint) {
+      if (rectStale) {
+        rect = host.getBoundingClientRect();
+        rectStale = false;
+      }
+      aim.x = ((point.x - rect.left) / rect.width - 0.5) * 0.16;
+      aim.y = ((point.y - rect.top) / rect.height - 0.5) * 0.1;
+    }
     pan.x += (aim.x - pan.x) * 0.05;
     pan.y += (aim.y - pan.y) * 0.05;
     scene.rotation.y = pan.x;
@@ -129,6 +158,7 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
     if (on === running) return;
     running = on;
     cancelAnimationFrame(raf);
+    bind(on);
     if (on && !reduce) {
       last = 0;
       raf = requestAnimationFrame(loop);
@@ -137,14 +167,34 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
   };
 
   const onMove = (e: PointerEvent) => {
-    const rect = host.getBoundingClientRect();
-    aim.x = ((e.clientX - rect.left) / rect.width - 0.5) * 0.16;
-    aim.y = ((e.clientY - rect.top) / rect.height - 0.5) * 0.1;
+    point.x = e.clientX;
+    point.y = e.clientY;
+    hasPoint = true;
   };
   const onLeave = () => {
+    hasPoint = false;
     aim.x = 0;
     aim.y = 0;
   };
+
+  // Nothing is listened for while the cluster is off screen or the tab is
+  // hidden: a window-level pointermove handler is a cost every other section
+  // of the page pays too.
+  function bind(on: boolean) {
+    if (reduce) return;
+    if (on) {
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointerleave", onLeave);
+      window.addEventListener("scroll", staleRect, { passive: true });
+      window.addEventListener("resize", staleRect);
+    } else {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("scroll", staleRect);
+      window.removeEventListener("resize", staleRect);
+      onLeave();
+    }
+  }
 
   // Each model is placed the moment it arrives, so one slow file doesn't
   // hold up the rest and the cluster fills in instead of popping.
@@ -166,7 +216,7 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
         const sweep = like.sphere ? Math.max(size.x, size.z) : Math.hypot(size.x, size.z);
         const fitDim = Math.max(sweep, size.y) || 1;
 
-        // inner spins, holder is positioned — so spinning never moves the anchor
+        // inner spins, holder is positioned, so spinning never moves the anchor
         const inner = new THREE.Group();
         inner.add(model);
         const holder = new THREE.Group();
@@ -198,6 +248,16 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
           bob: Math.random() * Math.PI * 2,
         };
 
+        // Compiling 40-odd PBR programs during a rendered frame is the single
+        // worst stall in the whole scene. compileAsync does it off the frame,
+        // in parallel where the driver supports it, before this model is ever
+        // drawn, so the cluster fills in without dropping frames.
+        try {
+          await renderer.compileAsync(holder, camera, scene);
+        } catch {
+          /* older driver with no parallel compile: fall through and render */
+        }
+
         layout();
         render();
         onFirst?.();
@@ -213,16 +273,11 @@ async function createCluster(host: HTMLDivElement, reduce: boolean): Promise<Api
 
   const ro = new ResizeObserver(layout);
   ro.observe(host);
-  if (!reduce) {
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerleave", onLeave);
-  }
 
   const dispose = () => {
     cancelAnimationFrame(raf);
+    bind(false);
     ro.disconnect();
-    window.removeEventListener("pointermove", onMove);
-    window.removeEventListener("pointerleave", onLeave);
     scene.traverse((o) => {
       const mesh = o as import("three").Mesh;
       if (!mesh.isMesh) return;

@@ -51,7 +51,7 @@ function sticker(ctx: CanvasRenderingContext2D, s: number) {
 
 /**
  * Ambient background: fragments of a Rubik's cube face drifting past.
- * Deliberately quiet — low opacity, no connecting lines, no cursor chasing.
+ * Deliberately quiet: low opacity, no connecting lines, no cursor chasing.
  * Pieces stay near square-on (a rotated square reads as a diamond, not a
  * sticker) and only wobble a few degrees. Pauses when the tab is hidden and
  * draws a single still frame under reduced motion.

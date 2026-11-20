@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "models": "./scripts/optimize-models.sh",
+    "models:verify": "node scripts/verify-models.mjs"
   },
   "dependencies": {
     "next": "16.4.5",
@@ -15,6 +17,7 @@
     "three": "^0.182.0"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.5.1",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

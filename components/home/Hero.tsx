@@ -7,7 +7,7 @@ export function Hero() {
     <section className="relative mx-auto grid max-w-6xl items-center gap-16 px-5 pb-16 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:pb-20">
       <div>
         <p className="eyebrow rise" style={{ ["--d" as string]: "0ms" }}>
-          Software Engineer · U of T &apos;28
+          {/* Software Engineer · U of T &apos;28 */}
         </p>
 
         <h1 className="mt-6 text-[clamp(3rem,8vw,5.6rem)] font-medium leading-[0.98] tracking-[-0.045em]">

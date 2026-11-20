@@ -31,14 +31,14 @@ export default function CosignPage() {
           second question, built over a weekend at Hack the North with one teammate.
         </p>
         <p>
-          It does two things. First it reads a document against itself and reports where it disagrees — a percentage
+          It does two things. First it reads a document against itself and reports where it disagrees: a percentage
           its own figures contradict, two sections that can&apos;t both be true, the same event dated twice. No search
           engine can settle those. Then it sends the remaining claims to independent research agents and{" "}
           <strong>retrieves every source they cite itself</strong>, rather than trusting the citation.
         </p>
         <p>
           That last part turned out to be the whole point. In one run an agent cited a CERN URL it had invented, which
-          404s — and <strong>both LLM judges passed it</strong>. Only the deterministic check that actually fetched
+          404s, and <strong>both LLM judges passed it</strong>. Only the deterministic check that actually fetched
           the page caught it. Funds are released on Solana devnet per verified claim, with the hash of the
           verification in the transaction memo.
         </p>

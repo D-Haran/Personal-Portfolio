@@ -1,5 +1,5 @@
 /**
- * Derrick's DR monogram — his own SVG, transcribed faithfully.
+ * Derrick's DR monogram: his own SVG, transcribed faithfully.
  * White strokes use currentColor; the small "cut" strokes that create the
  * woven breaks use `cutColor` (match it to the surface behind the logo).
  * `draw` enables the splash draw-on animation; `id` keeps clip ids unique

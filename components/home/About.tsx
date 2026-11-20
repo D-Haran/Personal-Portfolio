@@ -18,26 +18,24 @@ export function About() {
       <div className="mt-10 grid items-stretch gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
         <Reveal className="space-y-5 text-lg leading-relaxed text-muted">
           <p>
-            I&apos;m an Applied Math &amp; Statistics student at the University of Toronto, and I spend most of my free
-            time building software. What I enjoy most is going one level deeper than I strictly need to.
+            I&apos;m a third-year Applied Math &amp; Statistics student at the University of Toronto Mississauga. Most
+            of my time outside of classes goes into building software and exploring how things work.
           </p>
           <p>
-            That instinct runs through the work above. With <span className="text-fg">Kestrel</span> I wrote an LLM
-            inference engine from scratch to see exactly what happens between a prompt and a token, then found that
-            the GPU was spending 92% of its time waiting rather than computing. With{" "}
-            <span className="text-fg">mysh</span> I wrote a shell in C so that every fork, pipe and descriptor was
-            mine to get wrong. And with <span className="text-fg">Campify</span> I shipped a product to 300+ real
-            users and dealt with everything that comes with that.
+            Recently, I&apos;ve been working on <span className="text-fg">Kestrel</span>, a C++ LLM inference engine,
+            and <span className="text-fg">Campify</span>, a campus social app with over 300 users. I enjoy working on
+            projects that challenge my understanding of systems, from low-level programming to building applications
+            people actually use.
           </p>
+          <p>Outside of programming, I&apos;m interested in cars, music, and philosophy.</p>
           <p className="text-fg">
-            I&apos;m looking for a team where correctness and speed meet real products: software that&apos;s fast and
-            right, and things people actually use.
+            I&apos;m currently looking for software engineering internships for Summer 2027.
           </p>
         </Reveal>
 
-        {/* Height comes from the copy beside it: the cluster is absolutely
-            positioned, so it never adds space of its own. */}
-        <Reveal delay={80} className="relative -mx-2 min-h-[15rem] sm:min-h-[17rem] lg:mx-0 lg:min-h-0">
+        {/* The cluster is absolutely positioned, so it never adds space of its
+            own: these minimums are the only thing giving it a size. */}
+        <Reveal delay={80} className="relative -mx-2 min-h-[15rem] sm:min-h-[17rem] lg:mx-0 lg:min-h-[21rem]">
           <Likes />
         </Reveal>
       </div>

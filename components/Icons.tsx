@@ -37,7 +37,7 @@ export const MailIcon = ({ className = "size-4" }: P) => (
   </svg>
 );
 
-/** Site mark: three connected nodes — a tiny graph. */
+/** Site mark: three connected nodes, a tiny graph. */
 export const Mark = ({ className = "size-4" }: P) => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden className={className}>
     <path d="M5.5 14.5 10 5.5l4.5 9" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />

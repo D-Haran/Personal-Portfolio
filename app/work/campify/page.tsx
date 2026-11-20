@@ -42,7 +42,7 @@ export default function CampifyPage() {
         </p>
         <p>
           The feature everything depends on is importing a timetable, and my first version did it on-device: OCR the
-          screenshot, find day columns, pull course codes and times out with regexes. It worked and it was brittle —
+          screenshot, find day columns, pull course codes and times out with regexes. It worked and it was brittle:
           every school&apos;s timetable has a different layout, and OCR breaks words in places no rule predicts. I
           moved it to <strong>Vertex AI</strong>, reading the image straight into a strict JSON schema, which turned
           &ldquo;parse this layout&rdquo; into &ldquo;describe what you see.&rdquo; It now reads{" "}
@@ -50,7 +50,7 @@ export default function CampifyPage() {
         </p>
         <p>
           I also learned that paying users change what you build. A freemium tier on Stripe brought in 18 paying
-          students and 11 student clubs — and taught me that billing is a state-sync problem, not a payments one. And
+          students and 11 student clubs, and taught me that billing is a state-sync problem, not a payments one. And
           after noticing new users abandoning their profiles, I rebuilt onboarding around the drop-off step and took
           completion from <strong>54% to 71%</strong>.
         </p>

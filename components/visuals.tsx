@@ -174,12 +174,12 @@ export function ShellVisual({ className = "" }: { className?: string }) {
             <circle cx="10" cy={y} r="2" fill={hot ? "#5fd08a" : "#ffffff"} fillOpacity={hot ? 0.95 : 0.3} />
           </g>
         ))}
-        <rect x="56" y="36" width="30" height="28" rx="5" fill="#0b1013" fillOpacity="0.7" stroke="#5fd08a" strokeOpacity="0.5" />
+        <rect x="56" y="36" width="45" height="28" rx="5" fill="#0b1013" fillOpacity="0.7" stroke="#5fd08a" strokeOpacity="0.5" />
       </svg>
       <span className="absolute left-[60%] top-[42%] font-mono text-[9px] tracking-[0.08em] text-ok/90 sm:text-[10px]">
         select()
       </span>
-      <span className="absolute left-[4%] top-[4%] font-mono text-[10px] text-white/45">mysh$</span>
+      {/* <span className="absolute left-[4%] top-[4%] font-mono text-[10px] text-white/45">Custom Unix Shell$</span> */}
       {/* <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/60">
         ONE THREAD · 50+ CLIENTS
       </span> */}

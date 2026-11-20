@@ -20,8 +20,8 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.role}`,
-    template: `%s — ${site.name}`,
+    default: `${site.name} · ${site.role}`,
+    template: `%s · ${site.name}`,
   },
   description: site.description,
   authors: [{ name: site.name, url: site.url }],
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} · ${site.role}`,
     description: site.description,
   },
   twitter: { card: "summary_large_image" },

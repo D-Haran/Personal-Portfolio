@@ -28,19 +28,19 @@ export default function ShellPage() {
         <p>
           Typing <code>a | b &amp;</code> looks like one thing. It&apos;s actually two forks, a pipe, four{" "}
           <code>dup2</code> calls, five descriptors that each have to be closed in exactly the right process, a
-          process group, and a parent that must not block. Get it wrong and nothing crashes — it hangs, or leaks a
+          process group, and a parent that must not block. Get it wrong and nothing crashes: it hangs, or leaks a
           descriptor you notice a thousand commands later.
         </p>
         <p>
-          So I wrote one. <strong>mysh</strong> is a Unix shell in C with multi-stage pipelines, background jobs,
+          So I wrote one. A Unix shell in C with multi-stage pipelines, background jobs,
           signal handling, variable expansion and eleven built-ins, none of which fork. Built into the same process
           model is a <strong>TCP chat server</strong> that multiplexes every client through a single non-blocking{" "}
-          <code>select()</code> loop — no thread per connection. Each connection carries its own line buffer, because
+          <code>select()</code> loop, with no thread per connection. Each connection carries its own line buffer, because
           TCP has no message boundaries and one message can arrive in three reads.
         </p>
         <p>
           The useful tests weren&apos;t unit tests. Descriptor leaks only show up behaviourally, so the suite drives
-          the compiled binary as a subprocess and checks what it actually does — including{" "}
+          the compiled binary as a subprocess and checks what it actually does, including{" "}
           <strong>making <code>bind</code>, <code>socket</code> and <code>select</code> fail on purpose</strong> to
           confirm it degrades instead of dying.
         </p>

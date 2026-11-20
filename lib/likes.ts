@@ -1,6 +1,6 @@
 export type Like = {
   id: string;
-  /** Accessible name only — nothing is rendered as text. */
+  /** Accessible name only; nothing is rendered as text. */
   label: string;
   /** glTF file under /public/models. */
   model: string;
