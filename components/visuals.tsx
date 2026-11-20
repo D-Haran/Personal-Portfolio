@@ -57,95 +57,132 @@ export function KestrelVisual({ n = 12, className = "" }: { n?: number; classNam
         className="absolute inset-x-[10%] top-[10%] h-[8%] rounded-sm bg-gradient-to-b from-transparent via-white/25 to-transparent"
         style={{ animation: "sweep 6s linear infinite" }}
       />
-      <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/70">CAUSAL MASK · KV CACHED</span>
+      {/* <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/70">CAUSAL MASK · KV CACHED</span> */}
     </div>
   );
 }
 
-/** Nodes for the RepoGraph card visual — loosely the real fixture graph. */
-const G_NODES: [number, number, string][] = [
-  [16, 26, "test"],
-  [40, 18, ""],
-  [64, 30, ""],
-  [86, 22, "changed"],
-  [28, 56, ""],
-  [54, 60, ""],
-  [80, 62, ""],
-  [18, 84, ""],
-  [46, 86, ""],
-  [74, 88, ""],
-];
-const G_EDGES: [number, number, boolean][] = [
-  [0, 1, true],
-  [1, 2, true],
-  [2, 3, true],
-  [4, 2, true],
-  [4, 5, false],
-  [5, 6, false],
-  [6, 3, false],
-  [7, 8, false],
-  [8, 9, false],
-  [5, 9, false],
-  [0, 4, false],
+/** Verdicts shown in the Cosign card visual, in the order the pipeline reports them. */
+const C_CLAIMS: [string, "ok" | "bad" | "warn", number][] = [
+  ["emissions cut 80%", "bad", 0.86],
+  ["fleet launched 2021", "ok", 0.62],
+  ["cost overrun 1,200%", "bad", 0.74],
+  ["18% measured drop", "ok", 0.54],
+  ["source: home.cern/…", "warn", 0.68],
+  ["12 vessels in service", "ok", 0.46],
 ];
 
+const C_TONE = {
+  ok: "#5fd08a",
+  bad: "#ef6f6f",
+  warn: "#f0b45c",
+} as const;
+
 /**
- * RepoGraph: a dependency graph on a pale prism background. The highlighted
- * path flows backward from a changed symbol to the test it affects.
+ * Cosign: a stack of extracted claims, each carrying the verdict the
+ * grounding gate gave it. The sweep is the judging pass moving down the list.
  */
-export function RepoGraphVisual({ className = "" }: { className?: string }) {
+export function CosignVisual({ className = "" }: { className?: string }) {
   return (
     <div
       className={`relative overflow-hidden ${className}`}
-      style={{ background: "linear-gradient(140deg, #f4f5f8 0%, #dfe3ec 55%, #c9d0de 100%)" }}
+      style={{
+        background:
+          "radial-gradient(120% 95% at 20% 0%, #3b2a6b 0%, #2a2160 38%, #16304a 72%, #0c1626 100%)",
+      }}
     >
       <div
         aria-hidden
-        className="absolute -bottom-1/3 -right-1/4 h-[90%] w-[90%] rotate-[-18deg] opacity-70 blur-2xl"
-        style={{ background: "conic-gradient(from 200deg, #ff9db0, #ffd98a, #a6f0c2, #8ec5ff, #c7a6ff, #ff9db0)" }}
+        className="absolute inset-0 opacity-45 mix-blend-soft-light"
+        style={{ background: "radial-gradient(55% 55% at 85% 90%, #37d6a0, transparent)" }}
       />
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 size-full" aria-hidden>
-        {G_EDGES.map(([a, b, hot], k) => {
-          const [x1, y1] = G_NODES[a];
-          const [x2, y2] = G_NODES[b];
-          return (
-            <line
-              key={k}
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              stroke={hot ? "#3570e6" : "#1b1d26"}
-              strokeOpacity={hot ? 0.9 : 0.22}
-              strokeWidth={hot ? 0.7 : 0.45}
-              vectorEffect="non-scaling-stroke"
-              className={hot ? "flow" : ""}
-              style={hot ? { strokeWidth: 2, animationDirection: "reverse" } : { strokeWidth: 1.2 }}
+      <div className="absolute inset-x-[9%] top-[13%] space-y-[4.5%]">
+        {C_CLAIMS.map(([label, tone, w], i) => (
+          <div key={label} className="flex items-center gap-[3%]">
+            <span
+              className="size-[7px] shrink-0 rounded-full"
+              style={{ background: C_TONE[tone], boxShadow: `0 0 10px ${C_TONE[tone]}` }}
             />
-          );
-        })}
+            <span
+              className="h-[6px] rounded-full"
+              style={{
+                width: `${w * 100}%`,
+                background: `linear-gradient(90deg, ${C_TONE[tone]}aa, ${C_TONE[tone]}22)`,
+                opacity: 0.85 - i * 0.06,
+              }}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        aria-hidden
+        className="absolute inset-x-[9%] top-[13%] h-[10%] rounded-sm bg-gradient-to-b from-transparent via-white/20 to-transparent"
+        style={{ animation: "sweep 7s linear infinite" }}
+      />
+      <svg viewBox="0 0 100 24" className="absolute inset-x-[9%] bottom-[16%] h-[14%] w-[82%]" aria-hidden>
+        <line x1="2" y1="12" x2="98" y2="12" stroke="#37d6a0" strokeOpacity="0.45" strokeWidth="1" className="flow" />
+        <circle cx="2" cy="12" r="3" fill="#37d6a0" />
+        <circle cx="98" cy="12" r="3" fill="#37d6a0" />
       </svg>
-      {G_NODES.map(([x, y, kind], k) => (
-        <span
-          key={k}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${x}%`, top: `${y}%` }}
-        >
-          {kind === "changed" && (
-            <span className="pulse-dot absolute inset-0 rounded-full text-[#3570e6]" />
-          )}
-          <span
-            className={`relative block rounded-full ring-4 ${
-              kind === "changed"
-                ? "size-3.5 bg-[#3570e6] ring-[#3570e6]/20"
-                : kind === "test"
-                  ? "size-3.5 bg-[#1f9d5c] ring-[#1f9d5c]/20"
-                  : "size-2.5 bg-[#1b1d26] ring-[#1b1d26]/10"
-            }`}
-          />
-        </span>
-      ))}
-      <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-[#1b1d26]/60">IMPACT ← CHANGED SYMBOL</span>
+      {/* <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/70">
+        GROUNDED · REFUTED · FABRICATED
+      </span> */}
+    </div>
+  );
+}
+
+/** Client sockets in the mysh card visual: [y offset, active]. */
+const S_FDS: [number, boolean][] = [
+  [14, true],
+  [27, false],
+  [40, true],
+  [53, true],
+  [66, false],
+  [79, true],
+];
+
+/**
+ * mysh: client file descriptors on the left, one select() loop in the middle.
+ * The ready ones light up; the loop never forks and never blocks.
+ */
+export function ShellVisual({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`relative overflow-hidden ${className}`}
+      style={{
+        background:
+          "radial-gradient(110% 90% at 80% 10%, #2a3a33 0%, #1b2a28 40%, #121a1e 75%, #0b1013 100%)",
+      }}
+    >
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-30 mix-blend-soft-light"
+        style={{ background: "radial-gradient(45% 45% at 18% 85%, #5fd08a, transparent)" }}
+      />
+      <svg viewBox="0 0 100 100" className="absolute inset-0 size-full" aria-hidden>
+        {S_FDS.map(([y, hot], i) => (
+          <g key={y}>
+            <path
+              d={`M10 ${y} C 32 ${y}, 38 50, 56 50`}
+              fill="none"
+              stroke={hot ? "#5fd08a" : "#ffffff"}
+              strokeOpacity={hot ? 0.75 : 0.16}
+              strokeWidth="1"
+              className={hot ? "flow" : ""}
+              style={hot ? { animationDelay: `${i * 0.18}s` } : undefined}
+            />
+            <circle cx="10" cy={y} r="2" fill={hot ? "#5fd08a" : "#ffffff"} fillOpacity={hot ? 0.95 : 0.3} />
+          </g>
+        ))}
+        <rect x="56" y="36" width="30" height="28" rx="5" fill="#0b1013" fillOpacity="0.7" stroke="#5fd08a" strokeOpacity="0.5" />
+      </svg>
+      <span className="absolute left-[60%] top-[42%] font-mono text-[9px] tracking-[0.08em] text-ok/90 sm:text-[10px]">
+        select()
+      </span>
+      <span className="absolute left-[4%] top-[4%] font-mono text-[10px] text-white/45">mysh$</span>
+      {/* <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/60">
+        ONE THREAD · 50+ CLIENTS
+      </span> */}
     </div>
   );
 }
@@ -165,19 +202,20 @@ export function CampifyVisual({ className = "", priority = false }: { className?
             src="/campify/friends-schedules.jpg"
             alt="Campify's friend schedule screen"
             fill
-            sizes="(min-width: 1024px) 220px, 45vw"
+            sizes="(min-width: 1024px) 260px, 45vw"
             priority={priority}
             className="object-cover object-bottom"
           />
         </div>
       </div>
-      <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/75">iOS · ANDROID · WEB</span>
+      {/* <span className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.2em] text-white/75">iOS · ANDROID · WEB</span> */}
     </div>
   );
 }
 
 export function ProjectVisual({ slug, className = "" }: { slug: string; className?: string }) {
   if (slug === "kestrel") return <KestrelVisual className={className} />;
-  if (slug === "repograph") return <RepoGraphVisual className={className} />;
+  if (slug === "cosign") return <CosignVisual className={className} />;
+  if (slug === "shell") return <ShellVisual className={className} />;
   return <CampifyVisual className={className} />;
 }

@@ -8,54 +8,48 @@ import { SectionHeading } from "./SectionHeading";
 
 export function Work() {
   return (
-    <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20">
+    <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:px-8 sm:py-14">
       <SectionHeading
         eyebrow="Selected work"
-        sub="An inference engine, a code-analysis tool and a consumer app. Each one has a write-up with the architecture, the numbers and what I'd change."
+        sub="An inference engine, a verification layer, a consumer app and a Unix shell."
       >
         Selected projects
       </SectionHeading>
 
-      <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {projects.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 120} className={i === 2 ? "md:col-span-2 lg:col-span-1" : ""}>
+          <Reveal key={p.slug} delay={i * 80}>
             <Link href={`/work/${p.slug}`} className="group block h-full" aria-label={`${p.title} case study`}>
-              <Spotlight className="card flex h-full flex-col p-3 transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:-translate-y-1.5 group-hover:border-line-strong group-hover:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.9)] sm:p-4">
-                <div className="relative z-10 overflow-hidden rounded-[1.25rem]">
+              <Spotlight className="card flex h-full flex-col p-2.5 transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:-translate-y-1 group-hover:border-line-strong group-hover:shadow-[0_24px_48px_-28px_rgb(0_0_0/0.9)]">
+                <div className="relative z-10 overflow-hidden rounded-[1rem]">
                   <ProjectVisual
                     slug={p.slug}
                     className="aspect-[4/3] transition-transform duration-700 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.03]"
                   />
                 </div>
-                <div className="relative z-10 flex flex-1 flex-col px-3 pb-3 pt-6 sm:px-4">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs tracking-[0.2em] text-accent-hi">{p.index}</span>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">{p.kicker}</span>
+
+                <div className="relative z-10 flex flex-1 flex-col px-2 pb-1.5 pt-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-lg font-medium tracking-tight">{p.title}</h3>
+                    <span className="font-mono text-[10px] tracking-[0.18em] text-accent-hi">{p.index}</span>
                   </div>
-                  <h3 className="mt-4 text-2xl font-medium tracking-tight sm:text-[1.7rem]">{p.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted">{p.summary}</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-faint">{p.kicker}</p>
 
-                  <dl className="mt-6 grid grid-cols-2 gap-3">
-                    {p.metrics.map((m) => (
-                      <div key={m.label} className="rounded-2xl border border-line bg-white/[0.02] px-3.5 py-3">
-                        <dt className="sr-only">{m.label}</dt>
-                        <dd className="font-mono text-lg tracking-tight text-ok">{m.value}</dd>
-                        <dd className="mt-0.5 text-xs leading-snug text-faint">{m.label}</dd>
-                      </div>
-                    ))}
-                  </dl>
+                  <p className="mt-3 text-[13px] leading-relaxed text-muted">{p.blurb}</p>
 
-                  <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-6">
-                    <ul className="flex flex-wrap gap-1.5">
-                      {p.stack.map((s) => (
-                        <li key={s} className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted">
-                          {s}
-                        </li>
+                  <div className="mt-auto pt-4">
+                    <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1 font-mono text-[11px] text-ok">
+                      {p.metrics.map((m, j) => (
+                        <span key={m.label}>
+                          {j > 0 && <span className="mr-2 text-faint">·</span>}
+                          {m.value}
+                          <span className="ml-1 text-faint">{m.label}</span>
+                        </span>
                       ))}
-                    </ul>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-hi">
+                    </p>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent-hi">
                       Case study
-                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </div>

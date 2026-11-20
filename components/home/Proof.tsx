@@ -3,9 +3,9 @@ import { Reveal } from "../Reveal";
 
 const stats = [
   { node: <CountUp to={300} suffix="+" />, label: "students using Campify" },
-  { node: <CountUp to={3} />, label: "platforms shipped — iOS, Android, web" },
+  { node: <CountUp to={217} />, label: "tok/s — Kestrel decode on an M2 Pro" },
   { node: <CountUp to={70} suffix="+" />, label: "AI patches evaluated at Mercor" },
-  { node: <CountUp to={3} suffix="×" />, label: "hackathon winner" },
+  { node: <CountUp to={3} suffix="×" />, label: "hackathon award winner" },
 ];
 
 export function Proof() {

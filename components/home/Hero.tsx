@@ -4,7 +4,7 @@ import { HeroPhoto } from "./HeroPhoto";
 
 export function Hero() {
   return (
-    <section className="relative mx-auto grid max-w-6xl items-center gap-16 px-5 pb-24 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:pb-28">
+    <section className="relative mx-auto grid max-w-6xl items-center gap-16 px-5 pb-16 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:pb-20">
       <div>
         <p className="eyebrow rise" style={{ ["--d" as string]: "0ms" }}>
           Software Engineer · U of T &apos;28
@@ -30,7 +30,7 @@ export function Hero() {
           style={{ ["--d" as string]: "420ms" }}
         >
           I&apos;m an Applied Math &amp; Statistics student at the University of Toronto. I&apos;ve written a Llama
-          inference runtime in C++, a static-analysis engine in Rust, and shipped a campus app to{" "}
+          inference engine in C++, a Unix shell in C, and shipped a campus app to{" "}
           <span className="text-fg">300+ students</span>.
         </p>
 

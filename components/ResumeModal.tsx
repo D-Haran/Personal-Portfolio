@@ -85,8 +85,8 @@ export function ResumeModal({ open, onClose }: { open: boolean; onClose: () => v
             <Image
               src="/resume-preview.jpg"
               alt="Derrick Ratnaharan's résumé"
-              width={1082}
-              height={1400}
+              width={1275}
+              height={1650}
               className="h-auto w-full"
               priority
             />

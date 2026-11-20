@@ -26,8 +26,8 @@ export function HeroPhoto() {
           <Image
             src="/resume-preview.jpg"
             alt=""
-            width={1082}
-            height={1400}
+            width={1275}
+            height={1650}
             className="h-full w-full object-cover object-top opacity-95"
           />
           <div className="absolute inset-0 bg-gradient-to-l from-black/15 to-transparent" />
@@ -36,7 +36,7 @@ export function HeroPhoto() {
         {/* the photo */}
         <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] ring-1 ring-white/10 shadow-[0_40px_80px_-30px_rgb(0_0_0/0.85)] transition-transform duration-500 ease-out group-hover:-translate-y-1 sm:rounded-[2.5rem]">
           <Image
-            src="/Derrick-hero.jpeg"
+            src="/derrick-hero.jpeg"
             alt="Derrick Ratnaharan"
             fill
             priority

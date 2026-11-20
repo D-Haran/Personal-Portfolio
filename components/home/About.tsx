@@ -1,32 +1,33 @@
-import Image from "next/image";
 import { awards, stack } from "@/lib/site";
+import { Likes } from "./Likes";
 import { LogoTile } from "../LogoTile";
 import { Reveal } from "../Reveal";
 import { SectionHeading } from "./SectionHeading";
 
 const now = [
-  { k: "Building", v: "Faster Metal kernels for Kestrel" },
+  { k: "Building", v: "Kestrel, now that the Metal path is 10× faster" },
   { k: "Leading", v: "Technical workshops at GDG on Campus UTM" },
   { k: "Studying", v: "Applied Math & Statistics, U of T" },
 ];
 
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20">
+    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:px-8 sm:py-14">
       <SectionHeading eyebrow="About">About me</SectionHeading>
 
-      <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-[1.2fr_1fr]">
-        <Reveal className="flex flex-col justify-center space-y-5 text-lg leading-relaxed text-muted">
+      <div className="mt-10 grid items-stretch gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
+        <Reveal className="space-y-5 text-lg leading-relaxed text-muted">
           <p>
             I&apos;m an Applied Math &amp; Statistics student at the University of Toronto, and I spend most of my free
             time building software. What I enjoy most is going one level deeper than I strictly need to.
           </p>
           <p>
             That instinct runs through the work above. With <span className="text-fg">Kestrel</span> I wrote an LLM
-            inference engine from scratch to see exactly what happens between a prompt and a token. With{" "}
-            <span className="text-fg">RepoGraph</span> I built a tool that answers &ldquo;what does this change
-            break?&rdquo; from the code itself. And with <span className="text-fg">Campify</span> I shipped a product
-            to 300+ real users and dealt with everything that comes with that.
+            inference engine from scratch to see exactly what happens between a prompt and a token, then found that
+            the GPU was spending 92% of its time waiting rather than computing. With{" "}
+            <span className="text-fg">mysh</span> I wrote a shell in C so that every fork, pipe and descriptor was
+            mine to get wrong. And with <span className="text-fg">Campify</span> I shipped a product to 300+ real
+            users and dealt with everything that comes with that.
           </p>
           <p className="text-fg">
             I&apos;m looking for a team where correctness and speed meet real products: software that&apos;s fast and
@@ -34,18 +35,10 @@ export function About() {
           </p>
         </Reveal>
 
-        <Reveal
-          delay={80}
-          className="group relative aspect-square w-full max-w-[30rem] max-h-[25rem] justify-self-center overflow-hidden rounded-full border border-line"
-        >
-          <Image
-            src="/derrick-about.jpg"
-            alt="Derrick at Okanagan Lake"
-            fill
-            sizes="(min-width: 824px) 280px, 60vw"
-            className="scale-[1.3] object-cover object-[50%_30%] transition-transform duration-700 ease-out group-hover:scale-[1.22]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b10]/55 via-transparent to-transparent" />
+        {/* Height comes from the copy beside it: the cluster is absolutely
+            positioned, so it never adds space of its own. */}
+        <Reveal delay={80} className="relative -mx-2 min-h-[15rem] sm:min-h-[17rem] lg:mx-0 lg:min-h-0">
+          <Likes />
         </Reveal>
       </div>
 
@@ -63,12 +56,15 @@ export function About() {
         </Reveal>
 
         <Reveal delay={140} className="card p-7">
-          <p className="eyebrow">Awards</p>
-          <ul className="mt-5 space-y-3">
+          <p className="eyebrow">Hackathons</p>
+          <ul className="mt-5 space-y-4">
             {awards.map((a) => (
-              <li key={a.prize} className="flex items-baseline justify-between gap-4 text-[0.95rem]">
-                <span className="text-fg">{a.prize}</span>
-                <span className="shrink-0 font-mono text-xs text-faint">{a.event}</span>
+              <li key={`${a.event}-${a.prize}`} className="text-[0.95rem]">
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="text-fg">{a.prize}</span>
+                  <span className="shrink-0 font-mono text-xs text-faint">{a.event}</span>
+                </div>
+                <p className="mt-1 text-sm leading-snug text-muted">{a.project}</p>
               </li>
             ))}
           </ul>
@@ -77,22 +73,29 @@ export function About() {
 
       <Reveal delay={120} className="card mt-6 p-7 sm:p-9">
         <p className="eyebrow">Tools &amp; technologies</p>
-        <ul className="mt-7 grid grid-cols-4 gap-x-2 gap-y-6 sm:grid-cols-5 lg:grid-cols-7">
-          {stack.map((s) => (
-            <li key={s.name} className="group flex flex-col items-center gap-2.5 text-center">
-              <LogoTile
-                src={s.logo}
-                alt={s.name}
-                size={56}
-                className="transition-transform duration-300 group-hover:-translate-y-1"
-                radius="rounded-2xl"
-              />
-              <span className="text-xs leading-tight text-muted transition-colors duration-300 group-hover:text-fg">
-                {s.name}
-              </span>
-            </li>
+        <div className="mt-8 space-y-9">
+          {stack.map((group) => (
+            <div key={group.group} className="grid gap-5 sm:grid-cols-[9rem_1fr] sm:gap-7">
+              <p className="pt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">{group.group}</p>
+              <ul className="grid grid-cols-4 gap-x-2 gap-y-6 sm:grid-cols-5 lg:grid-cols-7">
+                {group.items.map((s) => (
+                  <li key={s.name} className="group flex flex-col items-center gap-2.5 text-center">
+                    <LogoTile
+                      src={s.logo}
+                      alt={s.name}
+                      size={52}
+                      className="transition-transform duration-300 group-hover:-translate-y-1"
+                      radius="rounded-2xl"
+                    />
+                    <span className="text-[11px] leading-tight text-muted transition-colors duration-300 group-hover:text-fg sm:text-xs">
+                      {s.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </Reveal>
     </section>
   );

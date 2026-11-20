@@ -5,10 +5,10 @@ import { SectionHeading } from "./SectionHeading";
 
 export function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20">
+    <section id="experience" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:px-8 sm:py-14">
       <SectionHeading eyebrow="Experience">Where I&apos;ve worked</SectionHeading>
 
-      <ol className="mt-16 border-t border-line">
+      <ol className="mt-10 border-t border-line">
         {experience.map((e, i) => (
           <Reveal as="li" key={e.org} delay={i * 90} className="group border-b border-line">
             <div className="grid gap-4 py-9 transition-colors duration-500 md:grid-cols-[11rem_1fr_9rem] md:gap-10 md:py-11">
@@ -40,7 +40,7 @@ export function Experience() {
         ))}
       </ol>
 
-      <Reveal className="card mt-10 flex flex-col gap-6 p-7 sm:p-9 md:flex-row md:items-center md:justify-between">
+      <Reveal className="card mt-8 flex flex-col gap-6 p-7 sm:p-9 md:flex-row md:items-center md:justify-between">
         <div className="flex gap-5">
           <LogoTile src={education.logo.src} alt={education.logo.alt} size={56} fill={80} className="hidden sm:grid" />
           <div>

@@ -28,11 +28,11 @@ export default async function Image() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 96, letterSpacing: -4, lineHeight: 1 }}>Derrick Ratnaharan</div>
           <div style={{ fontSize: 40, color: "#a3a3b0", marginTop: 28 }}>
-            LLM inference in C++ · Static analysis in Rust · Apps people use
+            LLM inference in C++ · Systems in C · Apps people use
           </div>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          {["Kestrel", "RepoGraph", "Campify"].map((p) => (
+          {["Campify", "Kestrel", "Cosign", "mysh"].map((p) => (
             <div
               key={p}
               style={{

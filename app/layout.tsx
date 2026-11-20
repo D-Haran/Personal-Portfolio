@@ -4,7 +4,7 @@ import { Cursor } from "@/components/Cursor";
 import { Footer } from "@/components/Footer";
 import { Intro } from "@/components/Intro";
 import { Nav } from "@/components/Nav";
-import { Particles } from "@/components/Particles";
+import { Cubies } from "@/components/Cubies";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -25,7 +25,16 @@ export const metadata: Metadata = {
   },
   description: site.description,
   authors: [{ name: site.name, url: site.url }],
-  keywords: ["Derrick Ratnaharan", "software engineer", "University of Toronto", "LLM inference", "C++", "Rust", "portfolio"],
+  keywords: [
+    "Derrick Ratnaharan",
+    "software engineer",
+    "University of Toronto",
+    "LLM inference",
+    "C++",
+    "Metal",
+    "systems programming",
+    "portfolio",
+  ],
   openGraph: {
     type: "website",
     url: site.url,
@@ -52,7 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-dvh">
         <Intro />
         <Cursor />
-        <Particles />
+        <Cubies />
         <div aria-hidden className="aurora" />
         <div aria-hidden className="grain" />
         <a
